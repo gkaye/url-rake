@@ -31,7 +31,7 @@ def lambda_handler(event, context):
 
     urls = []
     for key in range(start, end + 1):
-        urls.append(f'https://www.test.com/{key}')
+        urls.append(f'https://www.cassavasciences.com/node/{key}')
 
 
     rs = (grequests.get(u) for u in urls)

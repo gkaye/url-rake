@@ -22,18 +22,42 @@ Resources:
           Properties:
             Path: /url_rake
             Method: get
+  ScheduledRule: 
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: "ScheduledRule"
+      ScheduleExpression: "rate(30 minutes)"
+      State: "ENABLED"
+      Targets: 
+        - 
+          Arn: 
+            Fn::GetAtt: 
+              - "UrlRakeFunction"
+              - "Arn"
+          Id: "TargetFunctionV1"
+  PermissionForEventsToInvokeLambda: 
+    Type: AWS::Lambda::Permission
+    Properties: 
+      FunctionName: 
+        Ref: "UrlRakeFunction"
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn: 
+        Fn::GetAtt: 
+          - "ScheduledRule"
+          - "Arn"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
+  UrlRakeApi:
     Description: "API Gateway endpoint URL for Prod stage for Url Rake function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/url_rake/"
-  HelloWorldFunction:
+  UrlRakeFunction:
     Description: "Url Rake Lambda Function ARN"
     Value: !GetAtt UrlRakeFunction.Arn
-  HelloWorldFunctionIamRole:
+  UrlRakeFunctionIamRole:
     Description: "Implicit IAM Role created for Url Rake function"
     Value: !GetAtt UrlRakeFunctionRole.Arn
 
