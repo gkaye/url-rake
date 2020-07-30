@@ -2,7 +2,7 @@
 A serverless application that periodically searches a range of URLs for new content and alerts a user via e-mail.  Leverages AWS Lambda for computing, SES for e-mail notifications, and S3 for state persistance and post-deployment configurations.
 
 ## Configuring
-### **Before deployment** configure the below values found in /template.yaml.
+### **Before deployment**, configure the below values found in /template.yaml.
 * **bucket**: The bucket used to store configuration and state.  This will be automatically created if it does not exist.  An existing bucket may be used, however the working AWS account must have read and write access to this bucket.
 * **config_s3_key**: The AWS S3 key used to store the config.  The default will work for most use cases.
 * **previously_valid_urls_s3_key**: The AWS S3 key used to store the previously known valid URLs.  The default will work for most use cases.
@@ -14,8 +14,8 @@ A serverless application that periodically searches a range of URLs for new cont
 * **default_start_value**: The starting value (used to populate %s in default_url).
 * **default_look_ahead**: The number of values to scan ahead.
 * **default_slide_window**: If enabled, updates the start_value to the last known URLs value + 1.  Must be True or False.
+* **ScheduleExpression**: A rate describing how often to search for new content.
 NOTE: values above starting with 'default' can be changed after deployment by editing the 'config_s3' file in 'bucket'
-
 ## Deploying
 Requirements:
 * The AWS SAM command line interface (https://aws.amazon.com/serverless/sam/)
