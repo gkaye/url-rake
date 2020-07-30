@@ -4,24 +4,39 @@ Description: >
   url-rake
   SAM Template for url-rake
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
 
 Resources:
   UrlRakeFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: url_rake/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Policies:
+        - AmazonSESFullAccess
       Events:
         UrlRake:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /url_rake
             Method: get
+      Timeout: 90
+      Environment:
+        Variables:
+          bucket: "desired_bucket_name"
+          config_s3_key: "config.json"
+          previously_valid_urls_s3_key: "previously_valid_urls.json"
+          logging_level: "INFO"
+          default_email_subject: "New URL Alert"
+          default_from_email: "valid@email.com"
+          default_to_email: "valid@email.com"
+          default_url: "https://www.google.com/%s"
+          default_start_value: "1"
+          default_look_ahead: "3"
+          default_slide_window: False
   ScheduledRule: 
     Type: AWS::Events::Rule
     Properties: 
@@ -48,9 +63,6 @@ Resources:
           - "Arn"
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   UrlRakeApi:
     Description: "API Gateway endpoint URL for Prod stage for Url Rake function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/url_rake/"
