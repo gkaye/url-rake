@@ -1,5 +1,5 @@
 # URL Rake
-Serverless application that periodically searches a range of URLs for new content and alerts a user via e-mail.  Leverages AWS Lambda for computing, SES for e-mail notifications, and S3 for state persistance and post-deployment configurations.
+A serverless application that periodically searches a range of URLs for new content and alerts a user via e-mail.  Leverages AWS Lambda for computing, SES for e-mail notifications, and S3 for state persistance and post-deployment configurations.
 
 ## Configuring
 ### **Before deployment** configure the below values found in /template.yaml.
