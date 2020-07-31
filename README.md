@@ -3,7 +3,7 @@ A serverless application that periodically searches a range of URLs for new cont
 
 ## Configuring
 ### **Before deployment**, configure the below values found in /template.yaml.
-#### *In a nutshell: Modify `bucket`, `default_email_subject`, `default_from_email`, `default_to_email`, `default_url`, `default_start_value`, and `default_look_ahead` to meet your specific needs.*
+##### *In a nutshell: Modify `bucket`, `default_email_subject`, `default_from_email`, `default_to_email`, `default_url`, `default_start_value`, and `default_look_ahead` to meet your specific needs.*
 #### Detailed explanations:
 * **bucket**: The bucket used to store configuration and state.  This will be automatically created if it does not exist.  An existing bucket may be used, however the working AWS account must have read and write access to this bucket.
 * **config_s3_key**: The AWS S3 key used to store the config.  The default will work for most use cases.
@@ -20,7 +20,7 @@ A serverless application that periodically searches a range of URLs for new cont
 NOTE: values above starting with 'default' can be changed after deployment by editing the 'config_s3' file in 'bucket'
 ## Deploying
 Requirements:
-* The AWS SAM command line interface (https://aws.amazon.com/serverless/sam/)
+* The [AWS SAM command line interface](https://aws.amazon.com/serverless/sam/)
 * Docker (Required by AWS SAM CLI)
 
 Run the following command to deploy:
