@@ -3,6 +3,8 @@ A serverless application that periodically searches a range of URLs for new cont
 
 ## Configuring
 ### **Before deployment**, configure the below values found in /template.yaml.
+#### *In a nutshell: Modify `bucket`, `default_email_subject`, `default_from_email`, `default_to_email`, `default_url`, `default_start_value`, and `default_look_ahead` to meet your specific needs.*
+#### Detailed explanations:
 * **bucket**: The bucket used to store configuration and state.  This will be automatically created if it does not exist.  An existing bucket may be used, however the working AWS account must have read and write access to this bucket.
 * **config_s3_key**: The AWS S3 key used to store the config.  The default will work for most use cases.
 * **previously_valid_urls_s3_key**: The AWS S3 key used to store the previously known valid URLs.  The default will work for most use cases.
@@ -22,4 +24,4 @@ Requirements:
 * Docker (Required by AWS SAM CLI)
 
 Run the following command to deploy:
-sam deploy --guided
+`sam deploy --guided`
