@@ -16,8 +16,8 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.8
       Policies:
-        - AmazonSESFullAccess
         - AmazonS3FullAccess
+        - AmazonSESFullAccess
       Events:
         UrlRake:
           Type: Api
